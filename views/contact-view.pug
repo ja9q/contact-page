@@ -1,0 +1,33 @@
+extends layout.pug
+
+block content
+    .spaced-out
+        h2 #{contact.firstName} #{contact.lastName} 
+        a.text-secondary(href="/") Back to list
+    hr
+    .row
+        .col-md.mb-3
+            div
+                strong Phone number: 
+                span #{contact.phoneNumber}
+            em May #{(contact.contactByPhone == 1) ? "" : "NOT "} be contacted by phone or text
+        .col-md.mb-3
+            div
+                strong Email address: 
+                span #{contact.emailAddress}
+            em May #{(contact.contactByEmail == 1) ? "" : "NOT "} be contacted by email
+    .mb-3
+        div
+            strong Address: 
+            section #{contact.street}
+            section #{contact.city}, #{contact.state} #{contact.zip}
+            section #{contact.country}
+            if contact.lat && contact.lat !== 0.0 && contact.lng !== 0.0
+                section (#{contact.lat}&#176; N, #{contact.lng}&#176; W)
+            else
+                section (No coordinates found)
+        em May #{(contact.contactByMail == 1) ? "" : "NOT "} be contacted by mail
+    hr
+    .btn-group
+        a.btn.btn-outline-secondary(href="/"+contact.id+"/edit") Edit Contact
+        a.btn.btn-danger(href="/"+contact.id+"/delete") Delete Contact

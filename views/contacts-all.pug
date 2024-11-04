@@ -1,0 +1,29 @@
+extends layout.pug
+
+block content
+    .spaced-out
+        h1 Contacts
+        a(href="/create")
+            button.btn.btn-primary Create a new contact
+    .home-body
+        .row.contacts-table
+            table.table.table-bordered
+                thead 
+                    tr.d-none.d-md-table-row
+                        th Name
+                        th Phone
+                        th Email 
+                        th Address 
+                        th Coordinates
+                        th Contact 
+                        if user
+                            th 
+                tbody 
+        .row
+            #map-container
+                #map
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
+    script(src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js")
+    script(src="/places.js")
+    script. 
+        loadPlaces()

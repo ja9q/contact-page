@@ -1,0 +1,9 @@
+extends layout.pug
+
+
+block content 
+    br
+    p #{desc}
+    if promptLogin
+        p Click <a href="/login">here</a> to login.
+    a.btn.btn-secondary(href="/") Return to Home Page

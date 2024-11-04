@@ -1,0 +1,33 @@
+extends layout.pug
+
+block content 
+    p.
+        Please select a username and password. There are no password rules, but as a suggestion, <code>password123</code> sounds good.
+    .card.bg-secondary-subtle
+        .card-body
+            form.form(action="/signup" method="post")
+                .form-group
+                    .mb-3
+                        label.form-label(for="first") First Name 
+                        input.form-control(name="first" required)
+                    .mb-3
+                        label.form-label(for="last") Last Name 
+                        input.form-control(name="last" required)
+                    hr
+                    .mb-3
+                        label.form-label(for="username") Username 
+                        input.form-control(name="username" required)
+                    .row
+                        .col-md.mb-3
+                            label.form-label(for="password") Password 
+                            input.form-control(name="password" type="password" required)
+                        .col-md.mb-3
+                            label.form-label(for="password2") Confirm Password 
+                            input.form-control(name="password2" type="password" required)
+                    .even-spacing
+                        button.btn.btn-primary(type="submit") Sign up
+                        a.text-secondary(href="/") Nevermind
+                    if message
+                        .alert.alert-warning #{message}
+                .even-spacing Already have an account? 
+                    a.text-secondary(href="/login") Sign in here!

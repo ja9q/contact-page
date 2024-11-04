@@ -1,0 +1,74 @@
+extends layout.pug
+
+ 
+
+block content 
+    .card.bg-secondary-subtle
+        .card-body
+            form.form(action=isEditing ? "/"+contact.id+"/edit" : "/create", method="post" )
+                .form-group
+                    fieldset
+                        legend Basic Info 
+                        .row
+                            .col-md-2.mb-3 
+                                label.form-label(for="prefix") Prefix:
+                                select.form-control(name="prefix" value=contact.namePrefix)
+                                    option(selected=contact.namePrefix=="")
+                                    option(selected=contact.namePrefix=="Mr.") Mr.
+                                    option(selected=contact.namePrefix=="Mrs.") Mrs.
+                                    option(selected=contact.namePrefix=="Ms.") Ms.
+                                    option(selected=contact.namePrefix=="Dr.") Dr.
+                            .col-md-5.mb-3
+                                label.form-label(for="first") First Name:
+                                input.form-control(name="first" value=contact.firstName required)
+                            .col-md-5.mb-3
+                                label.form-label(for="last") Last Name:
+                                input.form-control(name="last" value=contact.lastName required)
+                        .row
+                            .col-md.mb-3
+                                label.form-label(for="phone") Phone:
+                                input.form-control(name="phone" value=contact.phoneNumber)
+                            .col-md.mb-3
+                                label.form-label(for="email") Email:
+                                input.form-control(type="email" name="email" value=contact.emailAddress)
+                    fieldset 
+                        legend Address
+                        section.mb-3
+                            label.form-label(for="street") Street:
+                            input.form-control(name="street" value=contact.street)
+                        .row
+                            .col-md.mb-3
+                                label.form-label(for="city") City:
+                                input.form-control(name="city" value=contact.city)
+                            .col-md.mb-3
+                                label.form-label(for="state") State:
+                                input.form-control(name="state" value=contact.state)
+                        .row
+                            .col-md.mb-3
+                                label.form-label(for="zip") Zip:
+                                input.form-control(name="zip" value=contact.zip)
+                            .col-md.mb-3
+                                label.form-label(for="country") Country:
+                                input.form-control(name="country" value=contact.country)
+                    fieldset 
+                        legend Contact Preferences
+                        .form-check 
+                            input.form-check-input(type="checkbox" name="contact_by_phone" checked=contact.contactByPhone==1)
+                            label.form-check-label(for="contact_by_phone") Contact by phone
+                        .form-check 
+                            input.form-check-input(type="checkbox" name="contact_by_email" checked=contact.contactByEmail==1)
+                            label.form-check-label(for="contact_by_email") Contact by email
+                        .form-check 
+                            input.form-check-input(type="checkbox" name="contact_by_mail" checked=contact.contactByMail==1)
+                            label.form-check-label(for="contact_by_mail") Contact by mail
+                    if badCoords
+                        .alert.alert-warning Warning: no coordinates were found for the given location. Please confirm that you are okay with this address.
+                        input.form-check-input(type="checkbox" name="confirm_coords")
+                        label.form-check-label(for="confirm_coords") I understand that there are no coordinates
+                .even-spacing
+                    if isEditing
+                        button.btn.btn-primary(type="submit") Save 
+                        a.text-secondary(href="/") Cancel
+                    else 
+                        button.btn.btn-primary(type="submit") Add 
+                        a.text-secondary(href="/") Cancel

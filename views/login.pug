@@ -1,0 +1,20 @@
+extends layout.pug
+
+block content 
+    .card.bg-secondary-subtle
+        .card-body
+            form.form(action="/login" method="post")
+                .form-group
+                    .mb-3
+                        label.form-label(for="username") Username 
+                        input.form-control(name="username" required)
+                    .mb-3
+                        label.form-label(for="password") Password 
+                        input.form-control(name="password" type="password" required)
+                    .even-spacing
+                        button.btn.btn-primary(type="submit") Sign in
+                        a.text-secondary(href="/") Nevermind
+                    if message
+                        .alert.alert-warning #{message}
+            .even-spacing Don't have an account yet? 
+                a.text-secondary(href="/signup") Sign up here!

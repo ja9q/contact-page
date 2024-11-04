@@ -1,0 +1,9 @@
+extends layout.pug
+
+block content
+    h2 #{contact.firstName} #{contact.lastName} 
+    form(action="/"+contact.id+"/delete" method="post")
+        p.text-danger Are you sure you want to delete this contact?
+        .even-spacing
+            button.btn.btn-danger(type="submit") Yes! 
+            a.text-secondary(href="/") Nevermind
